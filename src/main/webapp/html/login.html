@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/login.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div>
+    <div class="be-content pren">
+
+        <div class="ioc_text">
+            <img src="../static/img/logo.png" alt="LOGO">
+            <span>旅游大数据平台</span>
+        </div>
+        <div>
+            <div>
+                <div class="br-content">
+                    <div class="input-group mb-4 bootint">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-user"></i></span>
+                        </div>
+                        <input type="text" class="form-control" name="username" placeholder="请输入用户名">
+                    </div>
+
+                    <div class="input-group mb-4 bootint">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-unlock-alt"></i></span>
+                        </div>
+                        <input type="password" class="form-control" name="password" placeholder="请输入密码">
+                    </div>
+                    <div class="input-group mb-4 bootint">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-text-width" aria-hidden="true"></i></span>
+                        </div>
+                        <input type="text" class="form-control" name="imageCode" placeholder="请输入验证码">
+                        <!--<img id="image" src="/validCode/image" alt="验证码" onclick="changeImage()">-->
+                        <img src="/validCode/image" id="imageCode" align="middle" onclick="this.src=this.src+'?'" />
+                        <a href="javascript:imageCode.onclick()">换一张?</a>
+                    </div>
+                    <div style="padding-top: 10px">
+                        <button class="btn" onclick="login()">登录</button>
+                    </div>
+                    <div class="be-con">
+                        <span>Copyright © 2018 - 2025 <a href="">系统登陆</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../static/js/axios.js"></script>
+<script>
+    function login() {
+        let urlSearchParams = new URLSearchParams();
+        urlSearchParams.append('username', document.querySelector("input[name='username']").value.trim());
+        urlSearchParams.append('password', document.querySelector("input[name='password']").value.trim());
+        urlSearchParams.append('imageCode', document.querySelector("input[name='imageCode']").value.trim());
+
+        axios.post('/form/login', urlSearchParams).then(resp => {
+            if (resp.data.respCode != 200) {
+                alert(resp.data.respMsg);
+            }
+            if (resp.data.respCode == 200) {
+                window.location.href = "/html/testAPI.html";
+            }
+        });
+    }
+</script>
+</body>
+</html>

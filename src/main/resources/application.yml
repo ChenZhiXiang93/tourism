@@ -1,0 +1,22 @@
+#http请求端口
+http.port: 8080
+#https端口
+server.port: 18080
+#协议配置
+server:
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: tomcat
+    key-store-type: PKCS12
+    key-alias: tomcat
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/tourism?characterEncoding=UTF-8
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: jayczx120
+    type: com.alibaba.druid.pool.DruidDataSource
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.bonc.pojo
+
